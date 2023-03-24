@@ -92,7 +92,6 @@ public class GameLoop implements Runnable {
                 long currentTime = System.nanoTime();
 
                 if (currentTime - lastFpsTime >= 1000000000) {
-                    System.out.println("FPS: " + fps);
                     fps = 0;
                     lastFpsTime = currentTime;
                 }
@@ -112,7 +111,6 @@ public class GameLoop implements Runnable {
                 long currentTime = System.nanoTime();
 
                 if (currentTime - lastUpsTime >= 1000000000) {
-                    System.out.println("UPS: " + ups);
                     ups = 0;
                     lastUpsTime = currentTime;
                 }

@@ -34,6 +34,8 @@ public class TilesManager {
 
     int worldPosX, worldPosY;
 
+    int keyBoardMovmentSpeed;
+
     public TilesManager(GamePanel gp) {
         this.gp = gp;
 
@@ -46,6 +48,33 @@ public class TilesManager {
     public void setDefaultPos() {
         worldPosX = 32;
         worldPosY = 0;
+
+        keyBoardMovmentSpeed = 5;
+    }
+
+    public void camera() {
+        if (gp.keyListener.up) {
+            worldPosY -= keyBoardMovmentSpeed;
+        }
+        if (gp.keyListener.down) {
+            worldPosY += keyBoardMovmentSpeed;
+        }
+        if (gp.keyListener.left) {
+            worldPosX -= keyBoardMovmentSpeed;
+        }
+        if (gp.keyListener.right) {
+            worldPosX += keyBoardMovmentSpeed;
+        }
+
+        worldPosX += gp.mouseListener.dx * 4;
+        worldPosY += gp.mouseListener.dy * 4;
+
+        gp.mouseListener.dx = 0;
+        gp.mouseListener.dy = 0;
+
+        if (gp.keyListener.tPressed) {
+            setDefaultPos();
+        }
     }
 
     public void loadTilesImg() {
@@ -83,7 +112,6 @@ public class TilesManager {
                         worldX, worldY,
                         gp.tileSize, gp.tileSize, null);
             }
-            System.out.println(col + " : " + row);
 
             col++;
             if (col == worldCol) {

@@ -1,5 +1,7 @@
 package main;
 
+import inputs.KeyListener;
+import inputs.MouseListener;
 import map.TilesManager;
 
 import javax.swing.*;
@@ -17,14 +19,21 @@ public class GamePanel extends JPanel{
     public final int screenWidth = screenCol * tileSize;
     public final int screenHeight = screenRow * tileSize;
 
+
     public GameLoop gameLoop = new GameLoop(this);
     public TilesManager tilesManager = new TilesManager(this);
+    public KeyListener keyListener = new KeyListener();
+    public MouseListener mouseListener = new MouseListener();
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+        this.requestFocus();
+        this.addKeyListener(keyListener);
+        this.addMouseListener(mouseListener);
+        this.addMouseMotionListener(mouseListener);
         start();
     }
 
@@ -34,8 +43,7 @@ public class GamePanel extends JPanel{
 
     public void update(double deltaTime) {
 
-        System.out.println("Update");
-        System.out.println(deltaTime);
+        tilesManager.camera();
 
     }
 
