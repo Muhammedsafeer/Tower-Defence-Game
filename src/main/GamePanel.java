@@ -1,8 +1,9 @@
 package main;
 
+import map.TilesManager;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class GamePanel extends JPanel{
 
@@ -16,17 +17,13 @@ public class GamePanel extends JPanel{
     public final int screenWidth = screenCol * tileSize;
     public final int screenHeight = screenRow * tileSize;
 
-    GameLoop gameLoop = new GameLoop(this);
-
-    int x = 100;
-
-    private BufferedImage buffer;
+    public GameLoop gameLoop = new GameLoop(this);
+    public TilesManager tilesManager = new TilesManager(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
-//        this.addMouseListener(ml);
         this.setFocusable(true);
         start();
     }
@@ -44,15 +41,14 @@ public class GamePanel extends JPanel{
 
     @Override
     public void paintComponent(Graphics g) {
+
         super.paintComponent(g);
+
         Graphics2D g2d = (Graphics2D) g;
 
-        // render game state
-        g2d.setColor(Color.WHITE);
-        g2d.drawString("Hello World", x, 100);
+        tilesManager.draw(g2d);
 
         g2d.dispose();
 
-        System.out.println("Render");
     }
 }
